@@ -67,5 +67,15 @@ def trigger(shutterspeed,iso,aperture):
 
 	return "Photo taken with: AP:%s -  ISO:%s "% (aperture, iso)
 
+@app.route("/download_image/<int:flag>", methods=['POST',])
+def download_image(flag):
+	global CONFIG_STATE
+	
+	if flag != 0 and flag != 1:
+		return "Can't assign download to other value rather than 0 or 1"
+	else:
+ 		CONFIG_STATE['download'] = bool(flag)
+		return "Download setted to %d" % flag
+
 if __name__ == "main":
 	app.run()
