@@ -20,5 +20,17 @@ The requirements ares listed at requirements.txt but basically needs python 2.7,
 [POST] -> **/trigger/:shutterspeed/:iso/:aperture**  
 *Triggers the camera with the included parameters*
 
+[POST] -> **/trigger_iso/:iso**  
+*Set the iso and trigger the camera*
+
+[POST] -> **/trigger_shutterspeed/:iso**  
+*Set the shutterspeed and trigger the camera*
+
+[POST] -> **/trigger_aperture/:iso**  
+*Set the aperture and trigger the camera*
+
+[POST] -> **/download_image/:flag**  
+*Changes the configuration to enable/disable the download mode*
+
 ## Usage
 To start the web server you may use init.sh script
