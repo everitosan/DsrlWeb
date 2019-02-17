@@ -24,6 +24,7 @@ def getConfig():
 
         # get directions of configurations
         list__config = subprocess.check_output(["gphoto2", "--list-config"])
+        print(list__config)
 
         # split them in a list for later searchs
         SETTINGS_LIST = list__config.split("\n")
