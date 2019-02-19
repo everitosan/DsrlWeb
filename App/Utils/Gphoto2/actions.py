@@ -2,8 +2,8 @@
 from subprocess import check_output
 import os
 # Gphoto2
-from App.Utils.Gphoto2.routes import routes
-from App.Utils.Gphoto2.decorators import config
+from Utils.Gphoto2.routes import routes
+from Utils.Gphoto2.decorators import config, uncertainty_Gphoto2
 
 
 def transform_to_dict(settings: bytes):
@@ -17,20 +17,24 @@ def transform_to_dict(settings: bytes):
     return settings_dict
 
 
+@uncertainty_Gphoto2
 def check_installed():
     res = check_output(["gphoto2", "-v"])
     return "Copyright" in res.decode("utf-8")
 
-
 @config
-def set_config(*args, **kwargs):
+def set_config(route, *args, **kwargs):
     val = kwargs.get("val")
-    os.system("gphoto2 --set-config {}={}", get_config_dir(key), val)
+    key = kwargs.get('key')
+    set_cmd = "{}={}".format(route, val)
+    os.system("gphoto2 --set-config {}".format(set_cmd))
+    return {
+        key: val
+    }
 
 
 @config
-def get_config(*args, **kwargs):
-    route = args[0]
+def get_config(route, *args, **kwargs):
     key = kwargs.get('key')
     conf = check_output(["gphoto2", "--get-config", route])
     settings = transform_to_dict(conf)

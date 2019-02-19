@@ -1,7 +1,7 @@
 # Python
 from contextlib import wraps
 # Gphoto2
-from App.Utils.Gphoto2.routes import get_route_for
+from Utils.Gphoto2.routes import get_route_for
 
 
 def config(fn):
@@ -14,4 +14,14 @@ def config(fn):
             return res
         else:
             print("Unknown setting {}".format(key))
+    return wrapper
+
+
+def uncertainty_Gphoto2(fn):
+    @wraps(fn)
+    def wrapper():
+        try:
+            fn()
+        except FileNotFoundError:
+            print("Error, need to install gphoto2")
     return wrapper

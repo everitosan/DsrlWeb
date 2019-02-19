@@ -1,16 +1,17 @@
 """
     This module is responsible of getting the routes based on the gphoto2 library
 """
-from subprocess import check_output
-
+from subprocess import check_output, CalledProcessError
+import sys
 
 def get_routes():
-    config = check_output(["gphoto2", "--list-config"])
-    return config.decode("utf-8").split("\n")
-
+    try:
+        config = check_output(["gphoto2", "--list-config"])
+        return config.decode("utf-8").split("\n")
+    except CalledProcessError:
+        sys.exit(0)
 
 routes = get_routes()
-
 
 def get_route_for(key):
     try:
