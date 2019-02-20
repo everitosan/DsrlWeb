@@ -1,3 +1,7 @@
+"""
+    This is the main entrance of the API
+"""
+
 # Flask
 from flask import Flask
 # App
@@ -5,7 +9,9 @@ from routes import register_endpoints
 
 
 def main():
-    print("installed")
+    """
+    Main function of the program
+    """
     app = Flask(__name__)
     register_endpoints(app)
     app.run(debug=True)

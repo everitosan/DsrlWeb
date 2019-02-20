@@ -2,8 +2,8 @@
 from subprocess import check_output
 import os
 # Gphoto2
-from Utils.Gphoto2.routes import routes
-from Utils.Gphoto2.decorators import config, uncertainty_Gphoto2
+from .routes import routes
+from .decorators import config, uncertainty_Gphoto2
 
 
 def transform_to_dict(settings: bytes):

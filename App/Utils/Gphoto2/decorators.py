@@ -1,7 +1,7 @@
 # Python
 from contextlib import wraps
 # Gphoto2
-from Utils.Gphoto2.routes import get_route_for
+from .routes import get_route_for
 
 
 def config(fn):
