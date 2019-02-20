@@ -14,20 +14,15 @@ The requirements ares listed at requirements.txt but basically needs python 2.7,
 
 ## Endpoints
 
-[GET] -> **/**   
+[GET] -> **api/v1/config**   
 *Gets the info of the camera, it's current settings and options*
 
-[POST] -> **/trigger/:shutterspeed/:iso/:aperture**  
-*Triggers the camera with the included parameters*
-
-[POST] -> **/trigger_iso/:iso**  
-*Set the iso and trigger the camera*
-
-[POST] -> **/trigger_shutterspeed/:iso**  
-*Set the shutterspeed and trigger the camera*
-
-[POST] -> **/trigger_aperture/:iso**  
-*Set the aperture and trigger the camera*
+[POST -> **api/v1/set**  
+{
+  "parameter": "iso",
+  "value": "800"
+}
+*Sets a parameter to a value of the camera*
 
 [POST] -> **/download_image/:flag**  
 *Changes the configuration to enable/disable the download mode*
