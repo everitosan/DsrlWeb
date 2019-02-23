@@ -25,7 +25,7 @@ class TestEndpoints(unittest.TestCase):
 
     def __test_set_config(self, parameter, value):
         post_param_req = {
-            "type": "post",
+            "type": "put",
             "url": "{}/set".format(URL),
             "verbose": True,
             "body": {

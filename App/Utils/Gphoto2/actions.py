@@ -1,8 +1,11 @@
+"""
+This module is in charge of communictign with the camera with the help of Gphoto2
+"""
+
 # Python
 from subprocess import check_output
 import os
 # Gphoto2
-from .routes import routes
 from .decorators import config, uncertainty_Gphoto2
 
 
@@ -19,11 +22,17 @@ def transform_to_dict(settings: bytes):
 
 @uncertainty_Gphoto2
 def check_installed():
+    """
+    chek if gphoto2 is installed
+    """
     res = check_output(["gphoto2", "-v"])
     return "Copyright" in res.decode("utf-8")
 
 @config
 def set_config(route, *args, **kwargs):
+    """
+    set configuration of a specified parameter
+    """
     val = kwargs.get("val")
     key = kwargs.get('key')
     set_cmd = "{}={}".format(route, val)
@@ -35,6 +44,9 @@ def set_config(route, *args, **kwargs):
 
 @config
 def get_config(route, *args, **kwargs):
+    """
+    retrives the value of a specified parametr
+    """
     key = kwargs.get('key')
     conf = check_output(["gphoto2", "--get-config", route])
     settings = transform_to_dict(conf)

@@ -25,7 +25,7 @@ def get_camera_info():
 @json_api_response
 def set_config():
     """
-    Take the config passed over the body of the request and call the cli helper with that params
+    Take the config passed over the body of the request and call the cli helper with those params
     """
     body = request.get_json()
     parameter = body.get("parameter")
