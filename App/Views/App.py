@@ -22,6 +22,7 @@ def get_app_config():
         },
     }
 
+
 @json_api_response
 def get_info():
     return {

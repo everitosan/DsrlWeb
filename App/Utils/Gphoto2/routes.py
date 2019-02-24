@@ -4,6 +4,7 @@
 from subprocess import check_output, CalledProcessError
 import sys
 
+
 def get_routes():
     try:
         config = check_output(["gphoto2", "--list-config"])
@@ -11,7 +12,9 @@ def get_routes():
     except CalledProcessError:
         sys.exit(0)
 
+
 routes = get_routes()
+
 
 def get_route_for(key):
     try:

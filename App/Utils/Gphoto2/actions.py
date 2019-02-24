@@ -28,6 +28,7 @@ def check_installed():
     res = check_output(["gphoto2", "-v"])
     return "Copyright" in res.decode("utf-8")
 
+
 @config
 def set_config(route, *args, **kwargs):
     """

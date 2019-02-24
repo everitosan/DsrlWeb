@@ -9,6 +9,7 @@ from HttpPy.Request import make_request
 
 URL = "http://127.0.0.1:5000/api/v1"
 
+
 def get_config():
     get_config_req = {
         "type": "get",
@@ -17,6 +18,7 @@ def get_config():
     }
 
     return make_request(get_config_req, False)
+
 
 class TestEndpoints(unittest.TestCase):
     """
@@ -38,7 +40,6 @@ class TestEndpoints(unittest.TestCase):
         confirm_res = get_config()
         body = json.loads(confirm_res.text)
         self.assertEqual(value, body.get(parameter))
-
 
     def test_get_config(self):
         """
