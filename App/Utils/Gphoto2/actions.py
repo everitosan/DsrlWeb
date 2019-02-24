@@ -16,14 +16,21 @@ def transform_to_dict(settings: bytes):
     for setting in settings_list:
         values = setting.split(": ")
         if len(values) >= 2:
-            settings_dict[values[0]] = values[1]
+            if values[0] == "Choice":
+                if settings_dict.get("Choices") is None:
+                    settings_dict["Choices"] = []
+                settings_dict["Choices"].append({
+                    "option": values[1].split(" ")[1]
+                })
+            else:
+                settings_dict[values[0]] = values[1]
     return settings_dict
 
 
 @uncertainty_Gphoto2
 def check_installed():
     """
-    chek if gphoto2 is installed
+    Chek if gphoto2 is installed
     """
     res = check_output(["gphoto2", "-v"])
     return "Copyright" in res.decode("utf-8")
@@ -32,7 +39,7 @@ def check_installed():
 @config
 def set_config(route, *args, **kwargs):
     """
-    set configuration of a specified parameter
+    Set configuration of a specified parameter
     """
     val = kwargs.get("val")
     key = kwargs.get('key')
@@ -46,7 +53,7 @@ def set_config(route, *args, **kwargs):
 @config
 def get_config(route, *args, **kwargs):
     """
-    retrives the value of a specified parametr
+    Retrives the value of a specified parameter
     """
     key = kwargs.get('key')
     conf = check_output(["gphoto2", "--get-config", route])
@@ -54,3 +61,16 @@ def get_config(route, *args, **kwargs):
     return {
         key: settings.get("Current")
     }
+
+
+@config
+def get_options(route, *args, **kwargs):
+    """
+    Retrives the options available for a parameter of the camera
+    """
+    print("*"*20)
+    print(key)
+    key = kwargs.get('key')
+    conf = check_output(["gphoto2", "--get-config", route])
+    settings = transform_to_dict(conf)
+    return settings.get("Choices")

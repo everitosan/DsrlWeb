@@ -6,13 +6,13 @@ from flask import request
 
 # Utils
 from Utils.Response import json_api_response
-from Utils.Gphoto2.actions import get_config, set_config as set_cli_config
+from Utils.Gphoto2.actions import get_options, get_config, set_config as set_cli_config
 
 
 @json_api_response
 def get_camera_info():
     """
-    parameters returned for /config endpoint
+    Parameters returned for /config endpoint
     """
     return {
         **get_config(key="iso"),
@@ -35,3 +35,17 @@ def set_config():
     else:
         res = {"error": "Check parameters"}
     return res
+
+
+@json_api_response
+def get_options(parameter: str):
+    """
+    Get available options of the camera for parameters like:
+    - iso
+    - shutterspeed
+    - aperture
+    """
+    p = get_options(key=parameter)
+    # return {
+    #     **get_options(key=parameter)
+    # }
