@@ -1,5 +1,6 @@
 """
-This module is in charge of communictign with the camera with the help of Gphoto2
+    This module is in charge of communictign with the camera with the
+    help of Gphoto2
 """
 
 # Python
@@ -68,8 +69,6 @@ def get_options(route, *args, **kwargs):
     """
     Retrives the options available for a parameter of the camera
     """
-    print("*"*20)
-    print(key)
     key = kwargs.get('key')
     conf = check_output(["gphoto2", "--get-config", route])
     settings = transform_to_dict(conf)

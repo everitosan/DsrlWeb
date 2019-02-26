@@ -14,10 +14,20 @@ def get_config():
     get_config_req = {
         "type": "get",
         "url": "{}/config".format(URL),
-        "verbose": True,
+        "verbose": False,
     }
 
     return make_request(get_config_req, False)
+
+
+def get_options(parameter):
+    get_options_req = {
+        "type": "get",
+        "url": "{}/options/{}".format(URL, parameter),
+        "verbose": False,
+    }
+
+    return make_request(get_options_req, False)
 
 
 class TestEndpoints(unittest.TestCase):
@@ -61,3 +71,15 @@ class TestEndpoints(unittest.TestCase):
         """
         iso_value = "800"
         self.__test_set_config("iso", iso_value)
+
+    def test_get_available_options(self):
+        """
+        Test getting available options for parameters
+        """
+        res = get_options("iso")
+        content_type = res.headers.get("Content-Type")
+        body = json.loads(res.text)
+
+        self.assertTrue("application/json" in content_type)
+        self.assertIsNotNone(body.get("options"))
+        self.assertIsInstance(body.get("options"), list)
