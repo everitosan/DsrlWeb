@@ -7,7 +7,11 @@ from flask import request
 # Utils
 from Utils.Response import json_api_response
 from Utils.Gphoto2.actions import (
-    get_options, get_config, set_config as set_cli_config)
+    get_options,
+    get_config,
+    set_config as set_cli_config,
+    trigger as trigger_camera
+)
 
 
 @json_api_response
@@ -50,3 +54,11 @@ def get_available_options(parameter: str):
     return {
         "options": get_options(key=parameter)
     }
+
+
+@json_api_response
+def trigger():
+    """
+    Capture of the camera
+    """
+    return trigger_camera()

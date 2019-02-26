@@ -27,9 +27,15 @@ def register_endpoints(app, base_api=None):
     )
     app.add_url_rule(
         __build__(base, "/set"),
-        view_func=Camera.set_config, methods=['PUT']
+        view_func=Camera.set_config,
+        methods=['PUT']
     )
     app.add_url_rule(
         __build__(base, "/options/<string:parameter>"),
         view_func=Camera.get_available_options
+    )
+    app.add_url_rule(
+        __build__(base, "/trigger/"),
+        view_func=Camera.trigger,
+        methods=['POST']
     )

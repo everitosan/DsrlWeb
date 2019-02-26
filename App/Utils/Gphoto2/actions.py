@@ -28,6 +28,11 @@ def transform_to_dict(settings: bytes):
     return settings_dict
 
 
+def __retrive_config__(route):
+    conf = check_output(["gphoto2", "--get-config", route])
+    return transform_to_dict(conf)
+
+
 @uncertainty_Gphoto2
 def check_installed():
     """
@@ -57,8 +62,7 @@ def get_config(route, *args, **kwargs):
     Retrives the value of a specified parameter
     """
     key = kwargs.get('key')
-    conf = check_output(["gphoto2", "--get-config", route])
-    settings = transform_to_dict(conf)
+    settings = __retrive_config__(route)
     return {
         key: settings.get("Current")
     }
@@ -69,7 +73,14 @@ def get_options(route, *args, **kwargs):
     """
     Retrives the options available for a parameter of the camera
     """
-    key = kwargs.get('key')
-    conf = check_output(["gphoto2", "--get-config", route])
-    settings = transform_to_dict(conf)
+    kwargs.get('key')
+    settings = __retrive_config__(route)
     return settings.get("Choices")
+
+
+def trigger():
+    """
+    Send command to trigger the camera
+    """
+    os.system("gphoto2 --capture-image")
+    return {"status": "ok"}

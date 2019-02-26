@@ -72,6 +72,12 @@ class TestEndpoints(unittest.TestCase):
         iso_value = "800"
         self.__test_set_config("iso", iso_value)
 
+    def test_set_shutterspeed(self):
+        """
+        Test set a parameter in the camera
+        """
+        self.__test_set_config("shutterspeed", "1/100")
+
     def test_get_available_options(self):
         """
         Test getting available options for parameters

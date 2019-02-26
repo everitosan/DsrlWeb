@@ -1,5 +1,6 @@
 """
-    This module is responsible of getting the routes based on the gphoto2 library
+    This module is responsible of getting the routes based on the
+    gphoto2 library
 """
 from subprocess import check_output, CalledProcessError
 import sys
