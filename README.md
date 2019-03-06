@@ -61,4 +61,7 @@ The requirements ares listed at requirements.txt but basically needs python 3.6,
 ```
 
 ## Usage
-To start the web server you may use init.sh script
+To start the web server.
+```ssh
+$ (env) python App
+```
